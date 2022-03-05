@@ -1,13 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:md_hadiuzzaman/widgets/item_card.dart';
-import 'package:md_hadiuzzaman/widgets/search_button.dart';
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:md_hadiuzzaman/cubits/product/product_cubit.dart';
+import 'package:md_hadiuzzaman/cubits/product/product_state.dart';
+
+import '../data/product_details.dart';
+import '../screen/details_page.dart';
+import '../widgets/item_card.dart';
+import '../widgets/search_button.dart';
 import '../widgets/appbar.dart';
 import '../widgets/category_card.dart';
+import '../widgets/titlebar.dart';
+import 'categori_page.dart';
 
 class HomePage extends StatefulWidget {
-  HomePage({Key? key}) : super(key: key);
+  const HomePage({Key? key}) : super(key: key);
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -17,89 +25,150 @@ class _HomePageState extends State<HomePage> {
   final GlobalKey<ScaffoldState> _key = GlobalKey();
   final Widget _sizedBox = const SizedBox(height: 10);
   final iconList = <IconData>[
-    Icons.brightness_5,
-    Icons.ten_k,
+    Icons.home,
+    Icons.add_shopping_cart_rounded,
   ];
   var _bottomNavIndex = 0;
 
   @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    BlocProvider.of<ProductCubit>(context).fetchData();
+
     return Scaffold(
       key: _key,
-      drawer: Drawer(),
+      drawer: const Drawer(),
       body: SafeArea(
-        child: SizedBox(
-          height: double.infinity,
-          width: double.infinity,
-          child: Column(
-            children: [
-              CustomAppBar(key2: _key),
-              _sizedBox,
-              const SearchButton(),
-              _sizedBox,
-              _sizedBox,
-              Container(
-                padding: const EdgeInsets.all(20),
+        child: BlocBuilder<ProductCubit, ProductState>(
+          builder: (context, state) {
+            if (state is LoadingState) {
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            }
+            if (state is LoadedState) {
+              List<ProductDetailsClass> _productDetails = state.productList;
+
+              return SizedBox(
+                height: double.infinity,
+                width: double.infinity,
                 child: Column(
                   children: [
-                    const TitleBar(
-                      title: 'Daily Deals',
-                    ),
+                    CustomAppBar(key2: _key),
                     _sizedBox,
-                    SizedBox(
-                      height: 270,
-                      child: ListView.builder(
-                        shrinkWrap: true,
-                        scrollDirection: Axis.horizontal,
-                        itemBuilder: (ctx, index) {
-                          return Row(
-                            children: const [
-                              ItemCard(),
-                              SizedBox(
-                                width: 20,
-                              ),
-                            ],
-                          );
-                        },
-                        itemCount: 10,
-                      ),
-                    ),
-                    _sizedBox,
-                    _sizedBox,
-                    const TitleBar(title: "Popular Categories"),
+                    const SearchButton(),
                     _sizedBox,
                     _sizedBox,
                     Container(
-                      height: 110,
-                      width: double.infinity,
-                      child: ListView.builder(
-                        shrinkWrap: true,
-                        scrollDirection: Axis.horizontal,
-                        itemBuilder: (ctx, index) {
-                          return Row(
-                            children: const [
-                              CategoryCard(),
-                              SizedBox(
-                                width: 20,
-                              )
-                            ],
-                          );
-                        },
-                        itemCount: 3,
+                      padding: const EdgeInsets.all(20),
+                      child: Column(
+                        children: [
+                          const TitleBar(
+                            title: 'Daily Deals',
+                          ),
+                          _sizedBox,
+                          SizedBox(
+                            height: 270,
+                            child: ListView.builder(
+                              shrinkWrap: true,
+                              scrollDirection: Axis.horizontal,
+                              itemBuilder: (ctx, index) {
+                                return Row(
+                                  children: [
+                                    ItemCard(
+                                      voidCallback: () {
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (ctx) => DetailsScreen(
+                                              price:
+                                                  _productDetails[index].price,
+                                              description:
+                                                  _productDetails[index]
+                                                      .description,
+                                              title:
+                                                  _productDetails[index].title,
+                                              rating:
+                                                  _productDetails[index].rating,
+                                              image:
+                                                  _productDetails[index].image,
+                                            ),
+                                          ),
+                                        );
+                                      },
+                                      price: _productDetails[index].price,
+                                      description:
+                                          _productDetails[index].description,
+                                      title: _productDetails[index].title,
+                                      rating: _productDetails[index].rating,
+                                      image: _productDetails[index].image,
+                                      id: _productDetails[index].id,
+                                    ),
+                                    const SizedBox(
+                                      width: 20,
+                                    ),
+                                  ],
+                                );
+                              },
+                              itemCount: _productDetails.length,
+                            ),
+                          ),
+                          _sizedBox,
+                          _sizedBox,
+                          const TitleBar(title: "Popular Categories"),
+                          _sizedBox,
+                          _sizedBox,
+                          SizedBox(
+                            height: 110,
+                            width: double.infinity,
+                            child: ListView.builder(
+                              shrinkWrap: true,
+                              scrollDirection: Axis.horizontal,
+                              itemBuilder: (ctx, index) {
+                                return Row(
+                                  children: [
+                                    CategoryCard(
+                                      callback: () {
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (ct) =>
+                                                    CategoricalScreen()));
+                                      },
+                                    ),
+                                    const SizedBox(
+                                      width: 20,
+                                    )
+                                  ],
+                                );
+                              },
+                              itemCount: 3,
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                   ],
                 ),
-              ),
-            ],
-          ),
+              );
+            }
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          },
         ),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {},
-        //params
         backgroundColor: const Color(0xffFEAB02),
-        child: const Icon(Icons.six_k_plus),
+        child: const Icon(
+          Icons.keyboard_voice,
+          size: 30,
+        ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: AnimatedBottomNavigationBar(
@@ -108,31 +177,7 @@ class _HomePageState extends State<HomePage> {
         gapLocation: GapLocation.center,
         notchSmoothness: NotchSmoothness.defaultEdge,
         onTap: (index) => setState(() => _bottomNavIndex = index),
-        //other params
       ),
-    );
-  }
-}
-
-class TitleBar extends StatelessWidget {
-  final String title;
-
-  const TitleBar({Key? key, required this.title}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Text(
-          title,
-          style: const TextStyle(
-            fontWeight: FontWeight.bold,
-            fontSize: 17,
-          ),
-        ),
-        const Spacer(),
-        const Icon(Icons.eleven_mp_sharp),
-      ],
     );
   }
 }

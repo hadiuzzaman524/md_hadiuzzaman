@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:md_hadiuzzaman/screen/home_page.dart';
+import 'package:md_hadiuzzaman/cubits/product/product_cubit.dart';
+import '../screen/home_page.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 void main() {
   runApp(const MyApp());
@@ -13,10 +15,14 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       theme: ThemeData(
         primarySwatch: Colors.blue,
-        backgroundColor: Color(0xffF5F5F8),
-        scaffoldBackgroundColor: Color(0xffF5F5F8),
+        backgroundColor: const Color(0xffF5F5F8),
+        scaffoldBackgroundColor: const Color(0xffF5F5F8),
       ),
-      home:  HomePage(),
+      home: MultiBlocProvider(providers: [
+        BlocProvider(
+          create: (BuildContext context) => ProductCubit(),
+        ),
+      ], child: const HomePage()),
     );
   }
 }
