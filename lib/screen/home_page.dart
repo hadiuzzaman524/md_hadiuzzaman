@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:md_hadiuzzaman/cubits/product/product_cubit.dart';
-import 'package:md_hadiuzzaman/cubits/product/product_state.dart';
 
+import '../constants.dart';
+import '../cubits/product/product_cubit.dart';
+import '../cubits/product/product_state.dart';
 import '../data/product_details.dart';
 import '../screen/details_page.dart';
 import '../widgets/item_card.dart';
@@ -20,6 +20,9 @@ class HomePage extends StatefulWidget {
   @override
   State<HomePage> createState() => _HomePageState();
 }
+
+
+// use stateful widget for animated bottom navigation
 
 class _HomePageState extends State<HomePage> {
   final GlobalKey<ScaffoldState> _key = GlobalKey();
@@ -52,7 +55,6 @@ class _HomePageState extends State<HomePage> {
             }
             if (state is LoadedState) {
               List<ProductDetailsClass> _productDetails = state.productList;
-
               return SizedBox(
                 height: double.infinity,
                 width: double.infinity,
@@ -134,11 +136,14 @@ class _HomePageState extends State<HomePage> {
                                     CategoryCard(
                                       callback: () {
                                         Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (ct) =>
-                                                    CategoricalScreen()));
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (ct) =>
+                                                const CategoricalScreen(),
+                                          ),
+                                        );
                                       },
+                                      title: category[index],
                                     ),
                                     const SizedBox(
                                       width: 20,
@@ -146,7 +151,7 @@ class _HomePageState extends State<HomePage> {
                                   ],
                                 );
                               },
-                              itemCount: 3,
+                              itemCount: category.length,
                             ),
                           ),
                         ],

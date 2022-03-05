@@ -70,10 +70,10 @@ class CategoricalProductView extends StatelessWidget {
                           backgroundColor: Colors.white,
                           radius: 48,
                           child: CircleAvatar(
-                            backgroundColor: Colors.grey,
+                            backgroundColor: Colors.white,
                             radius: 47,
-                            child: Image.asset(
-                              "images/img_1.png",
+                            child: Image.network(
+                              "https://fakestoreapi.com/img/71YXzeOuslL._AC_UY879_.jpg",
                               height: 70,
                               width: 60,
                             ),
@@ -84,7 +84,7 @@ class CategoricalProductView extends StatelessWidget {
                       const Padding(
                         padding: EdgeInsets.symmetric(horizontal: 10),
                         child: Text(
-                          "Nike Air Max 20",
+                          "Mens Casual Slim Fit",
                           style: TextStyle(
                             fontSize: 15,
                             fontWeight: FontWeight.bold,
@@ -97,7 +97,7 @@ class CategoricalProductView extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: const [
                           Text(
-                            "170.00#",
+                            "170.00 \$",
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                               color: Colors.blueAccent,

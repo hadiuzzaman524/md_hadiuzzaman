@@ -7,6 +7,7 @@ class RoundedProductDetailsView extends StatelessWidget {
   final grayColor = const Color(0xffededed);
   @override
   Widget build(BuildContext context) {
+    print(imageUrl);
     return  CircleAvatar(
       backgroundColor: const Color(0xffFADDCB),
       radius: 150,

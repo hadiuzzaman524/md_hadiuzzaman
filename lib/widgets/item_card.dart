@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:md_hadiuzzaman/cubits/toggle/toggle_cubit.dart';
+import 'package:md_hadiuzzaman/widgets/toggle_icon_button.dart';
 
 import '../data/product_details.dart';
 import 'custom_butto_with_icon.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ItemCard extends StatelessWidget {
   final VoidCallback voidCallback;
@@ -90,10 +93,7 @@ class ItemCard extends StatelessWidget {
                           color: Color(0xffFFE1E6),
                           borderRadius: BorderRadius.all(Radius.circular(10)),
                         ),
-                        child: const Icon(
-                          Icons.favorite_border_outlined,
-                          color: Colors.red,
-                        ),
+                        child: const ToggleIconButton(),
                       ),
                     ],
                   ),
@@ -116,7 +116,7 @@ class ItemCard extends StatelessWidget {
                   _sizedBox,
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
-                    children:  [
+                    children: [
                       Text(
                         "${price.toString()} \$",
                         style: const TextStyle(

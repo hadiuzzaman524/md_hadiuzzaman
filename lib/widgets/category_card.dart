@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 
 class CategoryCard extends StatelessWidget {
   final VoidCallback callback;
+  final String title;
 
-  const CategoryCard({Key? key, required this.callback}) : super(key: key);
+  const CategoryCard({Key? key, required this.callback, required this.title})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +17,6 @@ class CategoryCard extends StatelessWidget {
             height: 100,
             width: 220,
             decoration: const BoxDecoration(
-              color: Colors.green,
               image: DecorationImage(
                   image: AssetImage("images/img_2.png"), fit: BoxFit.cover),
               borderRadius: BorderRadius.all(
@@ -23,12 +24,12 @@ class CategoryCard extends StatelessWidget {
               ),
             ),
           ),
-          const Positioned(
+          Positioned(
             top: 30,
             left: 20,
             child: Text(
-              "Apple",
-              style: TextStyle(
+              title,
+              style: const TextStyle(
                 color: Colors.white,
                 fontWeight: FontWeight.bold,
                 fontSize: 20,
