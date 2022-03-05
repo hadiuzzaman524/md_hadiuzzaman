@@ -54,9 +54,9 @@ class ProductDetailsColorPik extends StatelessWidget {
                           ),
                         ),
                         const Icon(Icons.star, color: Colors.amber),
-                        const FittedBox(
-                          child: Text("(5222)",
-                          style: TextStyle(
+                         FittedBox(
+                          child: Text('${rating.count}\$',
+                          style: const TextStyle(
                             fontSize: 11,
                           ),),
                         ),
