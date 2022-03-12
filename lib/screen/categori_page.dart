@@ -73,10 +73,10 @@ class _CategoricalScreenState extends State<CategoricalScreen> {
             ],
           ),
           const SizedBox(
-            height: 20,
+            height: 10,
           ),
-          SizedBox(
-            height: 490,
+          Expanded(
+            //height: MediaQuery.of(context).size.height/1.8,
             child: GridView.count(
               crossAxisCount: 2,
               crossAxisSpacing: 10,

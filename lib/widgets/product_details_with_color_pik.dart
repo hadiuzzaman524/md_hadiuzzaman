@@ -20,8 +20,8 @@ class ProductDetailsColorPik extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.only(top: 20, bottom: 5),
-      height: 350,
+      padding: const EdgeInsets.only(top: 10, bottom: 5),
+      height: MediaQuery.of(context).size.height/2.5,//280,
       // color: Colors.amber,
       child: Container(
         width: double.infinity,
@@ -35,20 +35,21 @@ class ProductDetailsColorPik extends StatelessWidget {
           children: [
             Expanded(
               child: Container(
-                padding: const EdgeInsets.only(left: 20, right: 20, top: 10),
+                padding: const EdgeInsets.only(left: 20, right: 20, top: 8),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Row(
                       children: [
-                        Container(
-                          width: 295,
+                        SizedBox(
+                          width: 290,
                           child: Text(
                             title,
+                            maxLines: 2,
                             style: const TextStyle(
                               color: Colors.black,
                               fontWeight: FontWeight.bold,
-                              fontSize: 18,
+                              fontSize: 17,
                             ),
                             //  overflow: TextOverflow.clip,
                           ),
@@ -62,11 +63,11 @@ class ProductDetailsColorPik extends StatelessWidget {
                         ),
                       ],
                     ),
-                    const SizedBox(height: 10,),
+                    const SizedBox(height: 8,),
 
                     Text(
                       description,
-                      maxLines: 6,
+                      maxLines: 5,
                       style: const TextStyle(
                         color: Colors.black,
                         fontWeight: FontWeight.normal,
@@ -83,7 +84,7 @@ class ProductDetailsColorPik extends StatelessWidget {
                           style: TextStyle(
                             color: Colors.black,
                             fontWeight: FontWeight.bold,
-                            fontSize: 18,
+                            fontSize: 17,
                           ),
                         ),
                         SizeButton(),
@@ -128,14 +129,16 @@ class ProductDetailsColorPik extends StatelessWidget {
               ),
             ),
             Column(
-              mainAxisAlignment: MainAxisAlignment.end,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Container(
-                  height: 55,
+                  height: 50,
                   decoration: const BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.all(Radius.circular(20))),
                   child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       const SizedBox(
                         width: 20,

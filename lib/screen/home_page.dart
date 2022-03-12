@@ -55,16 +55,15 @@ class _HomePageState extends State<HomePage> {
             }
             if (state is LoadedState) {
               List<ProductDetailsClass> _productDetails = state.productList;
-              return SizedBox(
-                height: double.infinity,
-                width: double.infinity,
+              return Container(
+              //  color: Colors.red,
+                height: MediaQuery.of(context).size.height,
+                width: MediaQuery.of(context).size.width,
                 child: Column(
                   children: [
                     CustomAppBar(key2: _key),
                     _sizedBox,
                     const SearchButton(),
-                    _sizedBox,
-                    _sizedBox,
                     Container(
                       padding: const EdgeInsets.all(20),
                       child: Column(
@@ -74,7 +73,7 @@ class _HomePageState extends State<HomePage> {
                           ),
                           _sizedBox,
                           SizedBox(
-                            height: 270,
+                            height: MediaQuery.of(context).size.height/3,
                             child: ListView.builder(
                               shrinkWrap: true,
                               scrollDirection: Axis.horizontal,
@@ -122,7 +121,6 @@ class _HomePageState extends State<HomePage> {
                           _sizedBox,
                           _sizedBox,
                           const TitleBar(title: "Popular Categories"),
-                          _sizedBox,
                           _sizedBox,
                           SizedBox(
                             height: 110,

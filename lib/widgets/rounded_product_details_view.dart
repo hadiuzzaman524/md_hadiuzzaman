@@ -7,27 +7,26 @@ class RoundedProductDetailsView extends StatelessWidget {
   final grayColor = const Color(0xffededed);
   @override
   Widget build(BuildContext context) {
-    print(imageUrl);
     return  CircleAvatar(
       backgroundColor: const Color(0xffFADDCB),
-      radius: 150,
+      radius: 140,
       child: CircleAvatar(
-        radius: 149,
+        radius: 199,
         backgroundColor: Colors.white,
         child: CircleAvatar(
-          radius: 120,
+          radius: 110,
           backgroundColor: grayColor,
           child: CircleAvatar(
-            radius: 119,
+            radius: 109,
             backgroundColor: const Color(0xffFADDCB),
             child: CircleAvatar(
-              radius: 92,
+              radius: 82,
               backgroundColor: Colors.white ,
               child: Center(
                 child: Image(
                   image: NetworkImage(imageUrl),
-                  height: 140,
-                  width: 140,
+                  height: 130,
+                  width: 130,
                 ),
               ),
             ),

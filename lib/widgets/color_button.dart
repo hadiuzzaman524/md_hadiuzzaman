@@ -14,10 +14,10 @@ class ColorButton extends StatelessWidget {
       children: [
         CircleAvatar(
           backgroundColor: secondColor,
-          radius: 15,
+          radius: 13,
           child: CircleAvatar(
             backgroundColor: firstColor,
-            radius: 12,
+            radius: 10,
           ),
         ),
         const SizedBox(

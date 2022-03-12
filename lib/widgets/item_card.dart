@@ -32,7 +32,7 @@ class ItemCard extends StatelessWidget {
     return InkWell(
       onTap: voidCallback,
       child: Container(
-        height: 270,
+        height:260, //MediaQuery.of(context).size.height/2.5,
         width: 235,
         decoration: const BoxDecoration(
           color: Colors.white,
@@ -68,8 +68,8 @@ class ItemCard extends StatelessWidget {
                   _sizedBox,
                   Image.network(
                     image,
-                    height: 100,
-                    width: 110,
+                    height: 90,
+                    width: 100,
                   ),
                   _sizedBox,
                   Row(
@@ -98,13 +98,13 @@ class ItemCard extends StatelessWidget {
                     ],
                   ),
                   const SizedBox(
-                    height: 15,
+                    height: 10,
                   ),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 10),
                     child: Text(
                       title,
-                      maxLines: 3,
+                      maxLines: 2,
                       style: const TextStyle(
                         fontSize: 15,
                         fontWeight: FontWeight.bold,
